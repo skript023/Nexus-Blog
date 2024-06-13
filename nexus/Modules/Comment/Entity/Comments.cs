@@ -1,4 +1,5 @@
 ﻿using nexus.Config.Database;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace nexus.Modules.Comment.Entity
@@ -13,16 +14,20 @@ namespace nexus.Modules.Comment.Entity
 
         [Column("post_id")]
         public Guid PostId { get; set; }
-        
+
+        [Required]
         [Column("fullname")]
         public string Fullname { get; set; }
-        
+
+        [Required]
         [Column("email")]
         public string Email { get; set; }
-        
-        [Column("fullname")]
+
+        [Required]
+        [Column("comment")]
         public string Comment { get; set; }
-        
+
+        [Required]
         [Column("status")]
         public string Status { get; set; }
     }

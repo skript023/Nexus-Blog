@@ -47,6 +47,7 @@ namespace nexus.Config.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Posts>().ToTable("posts");
+            modelBuilder.Entity<Comments>().ToTable("comments");
         }
     }
 }
