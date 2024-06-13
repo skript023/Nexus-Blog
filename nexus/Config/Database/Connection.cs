@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
-using nexus.Post.Entity;
+using nexus.Modules.Post.Entity;
+using nexus.Modules.Comment.Entity;
 
 namespace nexus.Config.Database
 {
@@ -11,6 +12,7 @@ namespace nexus.Config.Database
         }
 
         public DbSet<Posts> Post { get; set; }
+        public DbSet<Comments> Comment { get; set; }
 
         public override int SaveChanges()
         {

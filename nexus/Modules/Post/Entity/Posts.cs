@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using nexus.Config.Database;
 
-namespace nexus.Post.Entity
+namespace nexus.Modules.Post.Entity
 {
     public class Posts : Timestamps
     {

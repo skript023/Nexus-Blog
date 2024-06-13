@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using nexus.Config.Database;
 using nexus.Config.Response;
-using nexus.Post.Entity;
+using nexus.Modules.Post.Entity;
 using System.Diagnostics;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace nexus.Post.Controller
+namespace nexus.Modules.Post.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -30,7 +30,7 @@ namespace nexus.Post.Controller
             var posts = await _context.Post.ToListAsync();
 
             var response = new Response<List<Posts>>();
-            response.Message = "Success get activity";
+            response.Message = "Success get posts";
             response.Success = true;
             response.Data = posts;
 
@@ -48,7 +48,7 @@ namespace nexus.Post.Controller
                 return NotFound();
             }
 
-            _response.Message = "Success get activity";
+            _response.Message = "Success get post";
             _response.Success = true;
             _response.Data = post;
 
@@ -64,7 +64,7 @@ namespace nexus.Post.Controller
 
             var result = CreatedAtAction(nameof(Get), new { id = post.Id }, post);
 
-            _response.Message = "Success create activity";
+            _response.Message = "Success create post";
             _response.Success = true;
 
             return _response.ToJson();
@@ -84,7 +84,7 @@ namespace nexus.Post.Controller
             _context.Entry(value).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            _response.Message = "Success update activity";
+            _response.Message = "Success update post";
             _response.Success = true;
 
             return _response.ToJson();
@@ -104,7 +104,7 @@ namespace nexus.Post.Controller
             _context.Post.Remove(post);
             await _context.SaveChangesAsync();
 
-            _response.Message = "Success delete activity";
+            _response.Message = "Success delete post";
             _response.Success = true;
 
             return _response.ToJson();

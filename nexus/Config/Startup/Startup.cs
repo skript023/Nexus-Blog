@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using nexus.Config.Database;
-using nexus.Post.Entity;
+using nexus.Modules.Post.Entity;
 
 namespace nexus.Config.Startup
 {
