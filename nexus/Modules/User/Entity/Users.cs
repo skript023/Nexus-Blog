@@ -18,14 +18,13 @@ namespace nexus.Modules.User.Entity
         public Users(UserCreate value) 
         {
             RoleId = value.RoleId;
-            PostId = value.PostId;
             Nik = NikGenerate.Instance.EightDigit();
             Image = value.Image;
             Fullname = value.Fullname;
             Username = value.Username;
             Email = value.Email;
-            hashPassword(value.Password)
-            Status = value.Status;
+            hashPassword(value.Password);
+            Status = "active";
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -34,9 +33,6 @@ namespace nexus.Modules.User.Entity
         
         [Column("role_id")]
         public Guid? RoleId { get; set; }
-        
-        [Column("post_id")]
-        public Guid? PostId { get; set; }
 
         [Column("nik")]
         public long Nik { get; set; }

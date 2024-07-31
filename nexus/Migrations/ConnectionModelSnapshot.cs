@@ -79,7 +79,7 @@ namespace nexus.Migrations
                         .HasColumnType("text")
                         .HasColumnName("fullname");
 
-                    b.Property<Guid>("PostId")
+                    b.Property<Guid?>("PostId")
                         .HasColumnType("uuid")
                         .HasColumnName("post_id");
 
@@ -92,7 +92,7 @@ namespace nexus.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -118,7 +118,7 @@ namespace nexus.Migrations
                         .HasColumnType("text")
                         .HasColumnName("article");
 
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
@@ -145,7 +145,7 @@ namespace nexus.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -166,6 +166,10 @@ namespace nexus.Migrations
                         .HasColumnName("id")
                         .HasDefaultValueSql("gen_random_uuid()");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -176,7 +180,14 @@ namespace nexus.Migrations
                         .HasColumnType("text")
                         .HasColumnName("status");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("roles", (string)null);
                 });
@@ -204,7 +215,6 @@ namespace nexus.Migrations
                         .HasColumnName("fullname");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("image");
 
@@ -217,11 +227,7 @@ namespace nexus.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("post_id");
-
-                    b.Property<Guid>("RoleId")
+                    b.Property<Guid?>("RoleId")
                         .HasColumnType("uuid")
                         .HasColumnName("role_id");
 
@@ -241,7 +247,16 @@ namespace nexus.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Nik")
+                        .IsUnique();
+
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("users", (string)null);
                 });
@@ -250,15 +265,11 @@ namespace nexus.Migrations
                 {
                     b.HasOne("nexus.Modules.Post.Entity.Posts", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PostId");
 
                     b.HasOne("nexus.Modules.User.Entity.Users", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Post");
 
@@ -269,15 +280,11 @@ namespace nexus.Migrations
                 {
                     b.HasOne("nexus.Modules.Category.Entity.Categories", "Category")
                         .WithMany("Posts")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("nexus.Modules.User.Entity.Users", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Category");
 
@@ -288,9 +295,7 @@ namespace nexus.Migrations
                 {
                     b.HasOne("nexus.Modules.Role.Entity.Roles", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });

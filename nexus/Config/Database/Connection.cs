@@ -52,30 +52,31 @@ namespace nexus.Config.Database
 
             modelBuilder.Entity<Categories>(entity =>
             {
-                entity.HasIndex(e => e.Name).IsUnique();
                 entity.ToTable("categories");
+                entity.HasIndex(e => e.Name).IsUnique();
                 entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasMany(category => category.Posts).WithOne(post => post.Category).HasForeignKey(post => post.CategoryId);
             });
 
             modelBuilder.Entity<Comments>(entity =>
             {
-                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.ToTable("comments");
+                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasOne(comment => comment.Post).WithMany(post => post.Comments).HasForeignKey(comment => comment.PostId);
             });
             
             modelBuilder.Entity<Roles>(entity =>
             {
-                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.ToTable("roles");
+                entity.HasIndex(e => e.Name).IsUnique();
+                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasMany(role => role.Users).WithOne(user => user.Role).HasForeignKey(user => user.RoleId);
             });
 
             modelBuilder.Entity<Posts>(entity =>
             {
-                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.ToTable("posts");
+                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey(post => post.UserId);
             });
             
