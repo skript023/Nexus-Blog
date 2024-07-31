@@ -1,4 +1,6 @@
 ﻿using nexus.Config.Database;
+using nexus.Modules.Post.Entity;
+using nexus.Modules.User.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,5 +32,9 @@ namespace nexus.Modules.Comment.Entity
         [Required]
         [Column("status")]
         public string Status { get; set; }
+
+        public Posts Post { get; set; }
+
+        public Users User { get; set; }
     }
 }

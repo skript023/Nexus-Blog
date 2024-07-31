@@ -1,4 +1,7 @@
 ﻿using nexus.Config.Database;
+using nexus.Modules.Comment.Entity;
+using nexus.Modules.Post.Entity;
+using nexus.Modules.Role.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +14,12 @@ namespace nexus.Modules.User.Entity
         
         [Column("role_id")]
         public Guid RoleId { get; set; }
+        
+        [Column("post_id")]
+        public Guid PostId { get; set; }
+
+        [Column("nik")]
+        public long Nik { get; set; }
 
         [Column("image")]
         public string Image { get; set; }
@@ -33,5 +42,11 @@ namespace nexus.Modules.User.Entity
 
         [Column("status")]
         public string Status { get; set; }
+
+        public Roles Role { get; set; }
+
+        public ICollection<Posts> Posts { get; set; }
+
+        public ICollection<Comments> Comments { get; set; }
     }
 }

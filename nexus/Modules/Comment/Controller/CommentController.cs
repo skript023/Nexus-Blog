@@ -10,16 +10,10 @@ namespace nexus.Modules.Comment.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController : ControllerBase
+    public class CommentController(Connection dbContext, Response<Comments> response) : ControllerBase
     {
-        private readonly Connection _context;
-        private readonly Response<Comments> _response;
-
-        public CommentController(Connection dbContext, Response<Comments> response)
-        {
-            _context = dbContext;
-            _response = response;
-        }
+        private readonly Connection _context = dbContext;
+        private readonly Response<Comments> _response = response;
 
         // GET: api/<CommentController>
         [HttpGet]
@@ -27,10 +21,12 @@ namespace nexus.Modules.Comment.Controller
         {
             var comments = await _context.Comment.ToListAsync();
 
-            var response = new Response<List<Comments>>();
-            response.Message = "Success get comments";
-            response.Success = true;
-            response.Data = comments;
+            var response = new Response<List<Comments>>
+            {
+                Message = "Success get comments",
+                Success = true,
+                Data = comments
+            };
 
             return response.ToJson();
         }

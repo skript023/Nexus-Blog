@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using nexus.Config.Database;
+using nexus.Modules.Category.Entity;
+using nexus.Modules.Comment.Entity;
+using nexus.Modules.User.Entity;
 
 namespace nexus.Modules.Post.Entity
 {
@@ -30,5 +33,11 @@ namespace nexus.Modules.Post.Entity
         [Required]
         [Column("status")]
         public string Status { get; set; }
+
+        public Categories Category { get; set; }
+
+        public ICollection<Comments> Comments { get; set; }
+
+        public Users User { get; set; }
     }
 }

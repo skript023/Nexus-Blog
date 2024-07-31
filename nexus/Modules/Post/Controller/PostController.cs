@@ -12,16 +12,10 @@ namespace nexus.Modules.Post.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class PostController(Connection dbContext, Response<Posts> response) : ControllerBase
     {
-        private readonly Connection _context;
-        private readonly Response<Posts> _response;
-
-        public PostController(Connection dbContext, Response<Posts> response)
-        {
-            _context = dbContext;
-            _response = response;
-        }
+        private readonly Connection _context = dbContext;
+        private readonly Response<Posts> _response = response;
 
         // GET: api/<ValuesController>
         [HttpGet]
@@ -29,10 +23,12 @@ namespace nexus.Modules.Post.Controller
         {
             var posts = await _context.Post.ToListAsync();
 
-            var response = new Response<List<Posts>>();
-            response.Message = "Success get posts";
-            response.Success = true;
-            response.Data = posts;
+            var response = new Response<List<Posts>>
+            {
+                Message = "Success get posts",
+                Success = true,
+                Data = posts
+            };
 
             return response.ToJson();
         }
