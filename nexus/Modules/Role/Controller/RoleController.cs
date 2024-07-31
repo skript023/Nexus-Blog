@@ -53,21 +53,56 @@ namespace nexus.Modules.Role.Controller
 
         // POST api/<RoleController>
         [HttpPost]
-        public void Post([FromBody] Roles value)
+        public async Task<ActionResult<Response<Roles>>> Post([FromBody] Roles value)
         {
+            _context.Role.Add(value);
+            await _context.SaveChangesAsync();
+            var result = CreatedAtAction(nameof(Get), new { id = value.Id }, value);
 
+            _response.Message = "Success create role";
+            _response.Success = true;
+
+            return _response.ToJson();
         }
 
         // PUT api/<RoleController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<Response<Roles>>> Put(Guid id, [FromBody] Roles value)
         {
+            var role = await _context.Role.FindAsync(id);
+
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            _context.Entry(value).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            _response.Message = "Success update role";
+            _response.Success = true;
+
+            return _response.ToJson();
         }
 
         // DELETE api/<RoleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<Response<Roles>>> Delete(Guid id)
         {
+            var role = await _context.User.FindAsync(id);
+
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            _context.User.Remove(role);
+            await _context.SaveChangesAsync();
+
+            _response.Message = "Success delete role";
+            _response.Success = true;
+
+            return _response.ToJson();
         }
     }
 }

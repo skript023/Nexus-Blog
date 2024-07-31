@@ -78,7 +78,7 @@ namespace nexus.Modules.User.Controller
             _context.Entry(value).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            _response.Message = "Success update post";
+            _response.Message = "Success update user";
             _response.Success = true;
 
             return _response.ToJson();
