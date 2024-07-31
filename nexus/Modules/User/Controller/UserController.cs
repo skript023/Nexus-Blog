@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using nexus.Config.Database;
 using nexus.Config.Response;
 using nexus.Modules.Post.Entity;
+using nexus.Modules.User.Dto;
 using nexus.Modules.User.Entity;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -52,11 +53,11 @@ namespace nexus.Modules.User.Controller
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task<ActionResult<Response<Users>>> Post([FromBody] Users user)
+        public async Task<ActionResult<Response<Users>>> Post([FromBody] UserCreate value)
         {
-            _context.User.Add(user);
+            var users = new Users(value);
+            _context.User.Add(users);
             await _context.SaveChangesAsync();
-            var result = CreatedAtAction(nameof(Get), new { id = user.Id }, user);
 
             _response.Message = "Success create user";
             _response.Success = true;
@@ -66,7 +67,7 @@ namespace nexus.Modules.User.Controller
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response<Users>>> Put(Guid id, [FromBody] Users value)
+        public async Task<ActionResult<Response<Users>>> Put(Guid id, [FromBody] UserUpdate value)
         {
             var user = await _context.User.FindAsync(id);
 

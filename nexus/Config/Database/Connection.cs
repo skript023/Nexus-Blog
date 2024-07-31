@@ -81,8 +81,11 @@ namespace nexus.Config.Database
             
             modelBuilder.Entity<Users>(entity =>
             {
-                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.ToTable("users");
+                entity.HasIndex(e => e.Nik).IsUnique();
+                entity.HasIndex(e => e.Email).IsUnique();
+                entity.HasIndex(e => e.Username).IsUnique();
+                entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasMany(user => user.Comments).WithOne(comment => comment.User).HasForeignKey(comment => comment.UserId);
             });
         }

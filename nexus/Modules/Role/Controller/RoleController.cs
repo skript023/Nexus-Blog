@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using nexus.Config.Database;
 using nexus.Config.Response;
 using nexus.Modules.Comment.Entity;
+using nexus.Modules.Role.Dto;
 using nexus.Modules.Role.Entity;
 using nexus.Modules.User.Entity;
 
@@ -53,11 +54,12 @@ namespace nexus.Modules.Role.Controller
 
         // POST api/<RoleController>
         [HttpPost]
-        public async Task<ActionResult<Response<Roles>>> Post([FromBody] Roles value)
+        public async Task<ActionResult<Response<Roles>>> Post([FromBody] RoleCreate value)
         {
-            _context.Role.Add(value);
+            var role = new Roles(value);
+
+            _context.Role.Add(role);
             await _context.SaveChangesAsync();
-            var result = CreatedAtAction(nameof(Get), new { id = value.Id }, value);
 
             _response.Message = "Success create role";
             _response.Success = true;
@@ -67,7 +69,7 @@ namespace nexus.Modules.Role.Controller
 
         // PUT api/<RoleController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response<Roles>>> Put(Guid id, [FromBody] Roles value)
+        public async Task<ActionResult<Response<Roles>>> Put(Guid id, [FromBody] RoleUpdate value)
         {
             var role = await _context.Role.FindAsync(id);
 

@@ -1,7 +1,10 @@
-﻿using nexus.Config.Database;
+﻿using Microsoft.AspNetCore.Identity;
+using nexus.Config.Database;
 using nexus.Modules.Comment.Entity;
 using nexus.Modules.Post.Entity;
 using nexus.Modules.Role.Entity;
+using nexus.Modules.User.Dto;
+using nexus.Utils;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,20 +12,37 @@ namespace nexus.Modules.User.Entity
 {
     public class Users : Timestamps
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public Users() { }
+
+        public Users(UserCreate value) 
+        {
+            RoleId = value.RoleId;
+            PostId = value.PostId;
+            Nik = NikGenerate.Instance.EightDigit();
+            Image = value.Image;
+            Fullname = value.Fullname;
+            Username = value.Username;
+            Email = value.Email;
+            hashPassword(value.Password)
+            Status = value.Status;
+        }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
         [Column("id")]
         public Guid Id { get; set; }
         
         [Column("role_id")]
-        public Guid RoleId { get; set; }
+        public Guid? RoleId { get; set; }
         
         [Column("post_id")]
-        public Guid PostId { get; set; }
+        public Guid? PostId { get; set; }
 
         [Column("nik")]
         public long Nik { get; set; }
 
         [Column("image")]
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         [Required]
         [Column("fullname")]
@@ -48,5 +68,15 @@ namespace nexus.Modules.User.Entity
         public ICollection<Posts> Posts { get; set; }
 
         public ICollection<Comments> Comments { get; set; }
+
+        public void hashPassword(string password)
+        {
+            Password = BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public bool VerifyPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, Password);
+        }
     }
 }

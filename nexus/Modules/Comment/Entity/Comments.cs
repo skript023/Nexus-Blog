@@ -12,10 +12,10 @@ namespace nexus.Modules.Comment.Entity
         public Guid Id { get; set; }
 
         [Column("user_id")]
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         [Column("post_id")]
-        public Guid PostId { get; set; }
+        public Guid? PostId { get; set; }
 
         [Required]
         [Column("fullname")]

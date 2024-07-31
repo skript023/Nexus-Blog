@@ -2,8 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using nexus.Config.Database;
 using nexus.Config.Response;
+using nexus.Modules.Category.Entity;
 using nexus.Modules.Comment.Entity;
 using nexus.Modules.Post.Entity;
+using nexus.Modules.Role.Entity;
+using nexus.Modules.User.Entity;
 
 namespace nexus.Config.Startup
 {
@@ -23,7 +26,10 @@ namespace nexus.Config.Startup
             // Configure the DbContext with PostgreSQL
             services.AddDbContext<Connection>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<Response<Posts>>();
+            services.AddScoped<Response<Categories>>();
             services.AddScoped<Response<Comments>>();
+            services.AddScoped<Response<Users>>();
+            services.AddScoped<Response<Roles>>();
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
