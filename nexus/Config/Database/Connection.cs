@@ -5,6 +5,8 @@ using nexus.Modules.Comment.Entity;
 using nexus.Modules.Category.Entity;
 using nexus.Modules.User.Entity;
 using nexus.Modules.Role.Entity;
+using nexus.Utils;
+using BCrypt.Net;
 
 namespace nexus.Config.Database
 {
@@ -48,6 +50,8 @@ namespace nexus.Config.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var adminRoleId = Guid.NewGuid();
+
             modelBuilder.HasPostgresExtension("uuid-ossp");
 
             modelBuilder.Entity<Categories>(entity =>
@@ -71,6 +75,25 @@ namespace nexus.Config.Database
                 entity.HasIndex(e => e.Name).IsUnique();
                 entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasMany(role => role.Users).WithOne(user => user.Role).HasForeignKey(user => user.RoleId);
+
+                entity.HasData(
+                    new Roles 
+                    { 
+                        Id = adminRoleId, 
+                        Name = "Admin", 
+                        Status = "active", 
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+                    },
+                    new Roles 
+                    { 
+                        Id= Guid.NewGuid(), 
+                        Name = "User", 
+                        Status = "active",
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+                    }
+                );
             });
 
             modelBuilder.Entity<Posts>(entity =>
@@ -88,6 +111,22 @@ namespace nexus.Config.Database
                 entity.HasIndex(e => e.Username).IsUnique();
                 entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasMany(user => user.Comments).WithOne(comment => comment.User).HasForeignKey(comment => comment.UserId);
+
+                entity.HasData(
+                    new Users
+                    {
+                        Id = Guid.NewGuid(),
+                        RoleId = adminRoleId,
+                        Nik = NikGenerate.Instance.EightDigit(),
+                        Fullname = "Administrator",
+                        Username = "admin",
+                        Email = "admin@gmail.com",
+                        Password = BCrypt.Net.BCrypt.HashPassword("123"),
+                        Status = "active",
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow,
+                    }
+                );
             });
         }
     }

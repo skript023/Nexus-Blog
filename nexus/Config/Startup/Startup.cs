@@ -21,7 +21,10 @@ namespace nexus.Config.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                //options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+            });
 
             // Configure the DbContext with PostgreSQL
             services.AddDbContext<Connection>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));

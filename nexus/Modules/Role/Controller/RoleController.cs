@@ -38,7 +38,7 @@ namespace nexus.Modules.Role.Controller
         [HttpGet("{id}")]
         public async Task<ActionResult<Response<Roles>>> Get(Guid id)
         {
-            var role = await _context.Role.FindAsync(id);
+            var role = await _context.Role.FirstOrDefaultAsync(r => r.Id == id);
 
             if (role == null)
             {

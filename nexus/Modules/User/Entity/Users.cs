@@ -23,7 +23,7 @@ namespace nexus.Modules.User.Entity
             Fullname = value.Fullname;
             Username = value.Username;
             Email = value.Email;
-            hashPassword(value.Password);
+            HashPassword(value.Password);
             Status = "active";
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -65,7 +65,7 @@ namespace nexus.Modules.User.Entity
 
         public ICollection<Comments> Comments { get; set; }
 
-        public void hashPassword(string password)
+        public void HashPassword(string password)
         {
             Password = BCrypt.Net.BCrypt.HashPassword(password);
         }

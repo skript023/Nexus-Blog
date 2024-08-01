@@ -22,7 +22,7 @@ namespace nexus.Modules.User.Controller
         [HttpGet]
         public async Task<ActionResult<Response<List<Users>>>> Get()
         {
-            var users = await _context.User.ToListAsync();
+            var users = await _context.User.Include(user => user.Role).ToListAsync();
 
             var response = new Response<List<Users>> {
                 Message = "Success get users",
@@ -37,7 +37,7 @@ namespace nexus.Modules.User.Controller
         [HttpGet("{id}")]
         public async Task<ActionResult<Response<Users>>> Get(Guid id)
         {
-            var users = await _context.User.FindAsync(id);
+            var users = await _context.User.Include(user => user.Role).FirstOrDefaultAsync(user => user.Id == id);
 
             if (users == null)
             {
