@@ -20,19 +20,22 @@ namespace nexus.Modules.Post.Entity
 
         [Required]
         [Column("title")]
-        public string Title { get; set; }
+        public required string Title { get; set; }
 
         [Required]
         [Column("article")]
-        public string Article { get; set; }
+        public required string Article { get; set; }
 
         [Required]
         [Column("slug")]
-        public string Slug { get; set; }
+        public required string Slug { get; set; }
+
+        [Column("image")]
+        public string? Image { get; set; }
 
         [Required]
         [Column("status")]
-        public string Status { get; set; }
+        public required string Status { get; set; }
 
         public Categories Category { get; set; }
 

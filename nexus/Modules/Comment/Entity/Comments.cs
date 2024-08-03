@@ -19,15 +19,15 @@ namespace nexus.Modules.Comment.Entity
 
         [Required]
         [Column("fullname")]
-        public string Fullname { get; set; }
+        public required string Fullname { get; set; }
 
         [Required]
         [Column("email")]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required]
         [Column("comment")]
-        public string Comment { get; set; }
+        public required string Comment { get; set; }
 
         [Required]
         [Column("status")]

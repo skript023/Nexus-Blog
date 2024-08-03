@@ -126,6 +126,10 @@ namespace nexus.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("text")
+                        .HasColumnName("image");
+
                     b.Property<string>("Slug")
                         .IsRequired()
                         .HasColumnType("text")
@@ -194,19 +198,19 @@ namespace nexus.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8ad4db7f-bf2a-4eb3-b33c-d6bce38c656a"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("7f8d96db-3db7-4ad5-a555-51f5541dad27"),
+                            CreatedAt = new DateTime(2024, 8, 1, 13, 5, 22, 2, DateTimeKind.Utc).AddTicks(6070),
                             Name = "Admin",
                             Status = "active",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UpdatedAt = new DateTime(2024, 8, 1, 13, 5, 22, 2, DateTimeKind.Utc).AddTicks(6071)
                         },
                         new
                         {
-                            Id = new Guid("2461476f-2436-4a6e-882e-0dd2eb8fa5eb"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("0838eda4-d3a0-4496-8d77-bafc4387b0f4"),
+                            CreatedAt = new DateTime(2024, 8, 1, 13, 5, 22, 2, DateTimeKind.Utc).AddTicks(6077),
                             Name = "User",
                             Status = "active",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UpdatedAt = new DateTime(2024, 8, 1, 13, 5, 22, 2, DateTimeKind.Utc).AddTicks(6077)
                         });
                 });
 
@@ -281,15 +285,15 @@ namespace nexus.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3663b4c8-edda-44b4-b793-de92090f68da"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("e8e85250-47bb-4d77-8a5e-953f9b4171ed"),
+                            CreatedAt = new DateTime(2024, 8, 1, 13, 5, 22, 104, DateTimeKind.Utc).AddTicks(3705),
                             Email = "admin@gmail.com",
                             Fullname = "Administrator",
-                            Nik = 101101021L,
-                            Password = "$2a$11$h18ydm73pn5/iOGrvqaFXuiaN.lq0RgFA0.W7YJE.3qVR7gcgsS3.",
-                            RoleId = new Guid("8ad4db7f-bf2a-4eb3-b33c-d6bce38c656a"),
+                            Nik = 94430450L,
+                            Password = "$2a$11$z4SLrvInol5eJ/y6gI7AV.RvfGm/hBDkjlW1dKoiJVTBRlIhUdRqK",
+                            RoleId = new Guid("7f8d96db-3db7-4ad5-a555-51f5541dad27"),
                             Status = "active",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UpdatedAt = new DateTime(2024, 8, 1, 13, 5, 22, 104, DateTimeKind.Utc).AddTicks(3712),
                             Username = "admin"
                         });
                 });
