@@ -59,7 +59,7 @@ namespace nexus.Utils
         {
             long timestamp = DateTime.UtcNow.Ticks;
             string hexTimestamp = timestamp.ToString("X");
-            return $"{slug}-{hexTimestamp}";
+            return $"{slug}-{hexTimestamp.ToLower()}";
         }
     }
 }
