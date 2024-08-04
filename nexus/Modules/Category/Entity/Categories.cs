@@ -8,7 +8,7 @@ namespace nexus.Modules.Category.Entity
     public class Categories : Timestamps
     {
         [Column("id")]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [Column("name")]

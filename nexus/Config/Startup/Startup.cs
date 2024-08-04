@@ -26,6 +26,19 @@ namespace nexus.Config.Startup
                 //options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
             });
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:5173")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod() //THIS LINE RIGHT HERE IS WHAT YOU NEED
+                            .AllowCredentials();
+                    });
+            });
+
+
             // Configure the DbContext with PostgreSQL
             services.AddDbContext<Connection>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<Response<Posts>>();
@@ -52,6 +65,10 @@ namespace nexus.Config.Startup
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors();
+
+            app.UseCookiePolicy();
 
             app.UseEndpoints(endpoints =>
             {

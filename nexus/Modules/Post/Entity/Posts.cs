@@ -10,7 +10,7 @@ namespace nexus.Modules.Post.Entity
     public class Posts : Timestamps
     {
         [Column("id")]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Column("user_id")]
         public Guid? UserId { get; set; }

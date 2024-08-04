@@ -19,9 +19,9 @@ namespace nexus.Modules.Post.Controller
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<ActionResult<Response<List<Posts>>>> Get()
+        public async Task<ActionResult<Response<List<Posts>>>> Get(int page = 0, int limit = 10)
         {
-            var posts = await _context.Post.ToListAsync();
+            var posts = await _context.Post.Include(post => post.Comments).Skip(page).Take(limit).OrderBy(post => post.Id).ToListAsync();
 
             var response = new Response<List<Posts>>
             {
@@ -37,7 +37,7 @@ namespace nexus.Modules.Post.Controller
         [HttpGet("{id}")]
         public async Task<ActionResult<Response<Posts>>> Get(Guid id)
         {
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Post.Include(post => post.Comments).Include(post => post.User).FirstOrDefaultAsync(post => post.Id == id);
 
             if (post == null)
             {

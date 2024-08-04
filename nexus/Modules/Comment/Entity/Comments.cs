@@ -9,7 +9,7 @@ namespace nexus.Modules.Comment.Entity
     public class Comments : Timestamps
     {
         [Column("id")]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Column("user_id")]
         public Guid? UserId { get; set; }
@@ -31,10 +31,10 @@ namespace nexus.Modules.Comment.Entity
 
         [Required]
         [Column("status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = "Unapproved";
 
-        public Posts Post { get; set; }
+        public Posts? Post { get; set; }
 
-        public Users User { get; set; }
+        public Users? User { get; set; }
     }
 }

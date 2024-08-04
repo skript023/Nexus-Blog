@@ -51,6 +51,8 @@ namespace nexus.Config.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var adminRoleId = Guid.NewGuid();
+            var userId = Guid.NewGuid();
+            var categoryId = Guid.NewGuid();
 
             modelBuilder.HasPostgresExtension("uuid-ossp");
 
@@ -60,6 +62,14 @@ namespace nexus.Config.Database
                 entity.HasIndex(e => e.Name).IsUnique();
                 entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasMany(category => category.Posts).WithOne(post => post.Category).HasForeignKey(post => post.CategoryId);
+
+                entity.HasData(
+                    new Categories
+                    { 
+                        Id = categoryId,
+                        Name = "MMORPG"
+                    }
+                );
             });
 
             modelBuilder.Entity<Comments>(entity =>
@@ -81,17 +91,13 @@ namespace nexus.Config.Database
                     { 
                         Id = adminRoleId, 
                         Name = "Admin", 
-                        Status = "active", 
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
+                        Status = "active"
                     },
                     new Roles 
                     { 
                         Id= Guid.NewGuid(), 
                         Name = "User", 
-                        Status = "active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
+                        Status = "active"
                     }
                 );
             });
@@ -99,8 +105,52 @@ namespace nexus.Config.Database
             modelBuilder.Entity<Posts>(entity =>
             {
                 entity.ToTable("posts");
+                entity.HasIndex(e => e.Slug).IsUnique();
                 entity.Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
                 entity.HasOne(post => post.User).WithMany(user => user.Posts).HasForeignKey(post => post.UserId);
+
+                entity.HasData(
+                    new Posts
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = userId,
+                        CategoryId = categoryId,
+                        Title = "Article Test",
+                        Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        Slug = SlugGenerator.Instance.GenerateSlug("Article Test"),
+                        Status = "published",
+                    },
+                    new Posts
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = userId,
+                        CategoryId = categoryId,
+                        Title = "Article Test",
+                        Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        Slug = SlugGenerator.Instance.GenerateSlug("Article Test"),
+                        Status = "published",
+                    },
+                    new Posts
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = userId,
+                        CategoryId = categoryId,
+                        Title = "Article Test",
+                        Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        Slug = SlugGenerator.Instance.GenerateSlug("Article Test"),
+                        Status = "published",
+                    },
+                    new Posts
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = userId,
+                        CategoryId = categoryId,
+                        Title = "Dummy Article",
+                        Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        Slug = SlugGenerator.Instance.GenerateSlug("Article Test"),
+                        Status = "published",
+                    }
+                );
             });
             
             modelBuilder.Entity<Users>(entity =>
@@ -115,16 +165,14 @@ namespace nexus.Config.Database
                 entity.HasData(
                     new Users
                     {
-                        Id = Guid.NewGuid(),
+                        Id = userId,
                         RoleId = adminRoleId,
                         Nik = NikGenerate.Instance.EightDigit(),
                         Fullname = "Administrator",
                         Username = "admin",
                         Email = "admin@gmail.com",
                         Password = BCrypt.Net.BCrypt.HashPassword("123"),
-                        Status = "active",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
+                        Status = "active"
                     }
                 );
             });
