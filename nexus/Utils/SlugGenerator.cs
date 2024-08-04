@@ -1,10 +1,12 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace nexus.Utils
 {
     public class SlugGenerator
     {
         private static readonly SlugGenerator _instance = new();
+        private static readonly Random _random = new Random();
         public static SlugGenerator Instance
         {
             get
@@ -57,9 +59,16 @@ namespace nexus.Utils
         // Method to append hexadecimal timestamp to the slug
         private string AppendHexTimestamp(string slug)
         {
-            long timestamp = DateTime.UtcNow.Ticks;
-            string hexTimestamp = timestamp.ToString("X");
+            long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            int uniqueValue = GenerateUniqueValue(timestamp);
+            string hexTimestamp = uniqueValue.ToString("X");
             return $"{slug}-{hexTimestamp.ToLower()}";
+        }
+
+        private static int GenerateUniqueValue(long timestamp)
+        {
+            int lastEightDigits = (int)(timestamp % 100000000);
+            return lastEightDigits + _random.Next(0, 100000000) % 100000000;
         }
     }
 }

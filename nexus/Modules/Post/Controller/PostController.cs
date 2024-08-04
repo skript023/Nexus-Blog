@@ -50,6 +50,24 @@ namespace nexus.Modules.Post.Controller
 
             return _response.ToJson();
         }
+        
+        // GET api/<ValuesController>/5
+        [HttpGet("read-more/{slug}")]
+        public async Task<ActionResult<Response<Posts>>> ReadMore(string slug)
+        {
+            var post = await _context.Post.Include(post => post.Comments).FirstOrDefaultAsync(post => post.Slug == slug);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            _response.Message = "Success get post";
+            _response.Success = true;
+            _response.Data = post;
+
+            return _response.ToJson();
+        }
 
         // POST api/<ValuesController>
         [HttpPost]

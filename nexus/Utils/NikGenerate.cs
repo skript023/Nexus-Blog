@@ -35,7 +35,7 @@
             long tenDigitId = timestamp % 10000000000L; // Take last ten digits of the timestamp
 
             
-            return tenDigitId + _random.Next(0, 1000000000) % 10000000000L; // Ensure the ID is ten digits by potentially adding a random component
+            return tenDigitId + _random.NextInt64(0, 1000000000) % 10000000000L; // Ensure the ID is ten digits by potentially adding a random component
         }
     }
 }

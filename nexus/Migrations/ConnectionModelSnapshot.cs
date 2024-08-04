@@ -54,10 +54,10 @@ namespace nexus.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("df105327-3a71-431c-b8ca-b2a4a3065b45"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 43, DateTimeKind.Utc).AddTicks(9150),
+                            Id = new Guid("40210dde-c149-42fc-baf3-5477f9a1f9fb"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 639, DateTimeKind.Utc).AddTicks(8625),
                             Name = "MMORPG",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 43, DateTimeKind.Utc).AddTicks(9152)
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 639, DateTimeKind.Utc).AddTicks(8627)
                         });
                 });
 
@@ -166,6 +166,9 @@ namespace nexus.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("posts", (string)null);
@@ -173,51 +176,51 @@ namespace nexus.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("716f93dc-23e4-40f1-b0ef-f715416689f1"),
+                            Id = new Guid("d4dfca10-5842-4a9a-86be-9fb93137bb51"),
                             Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CategoryId = new Guid("df105327-3a71-431c-b8ca-b2a4a3065b45"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4383),
-                            Slug = "article-test-8DCB470BED09258",
+                            CategoryId = new Guid("40210dde-c149-42fc-baf3-5477f9a1f9fb"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4464),
+                            Slug = "article-test-47219ac",
                             Status = "published",
                             Title = "Article Test",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4384),
-                            UserId = new Guid("a25881b1-d522-4a71-b889-724da3084a81")
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4464),
+                            UserId = new Guid("923e1e77-df01-44a6-a778-7843178c7138")
                         },
                         new
                         {
-                            Id = new Guid("e27daea5-d7af-4e98-aced-e4d7be1dc490"),
+                            Id = new Guid("e646f47e-fd9a-49dd-8dbe-a8f72761a6c3"),
                             Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CategoryId = new Guid("df105327-3a71-431c-b8ca-b2a4a3065b45"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4652),
-                            Slug = "article-test-8DCB470BED09284",
+                            CategoryId = new Guid("40210dde-c149-42fc-baf3-5477f9a1f9fb"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4733),
+                            Slug = "article-test-3be7a81",
                             Status = "published",
                             Title = "Article Test",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4652),
-                            UserId = new Guid("a25881b1-d522-4a71-b889-724da3084a81")
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4733),
+                            UserId = new Guid("923e1e77-df01-44a6-a778-7843178c7138")
                         },
                         new
                         {
-                            Id = new Guid("e381d2b7-7e50-407b-a6da-8508046c8cb9"),
+                            Id = new Guid("27f3522e-3031-4bc8-81cc-90568f7dcbcd"),
                             Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CategoryId = new Guid("df105327-3a71-431c-b8ca-b2a4a3065b45"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4679),
-                            Slug = "article-test-8DCB470BED09295",
+                            CategoryId = new Guid("40210dde-c149-42fc-baf3-5477f9a1f9fb"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4752),
+                            Slug = "article-test-576b4c1",
                             Status = "published",
                             Title = "Article Test",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4679),
-                            UserId = new Guid("a25881b1-d522-4a71-b889-724da3084a81")
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4753),
+                            UserId = new Guid("923e1e77-df01-44a6-a778-7843178c7138")
                         },
                         new
                         {
-                            Id = new Guid("571f9934-c988-499b-b356-3c12215ab360"),
+                            Id = new Guid("2a032642-04ed-41d3-aca5-a0e52e44153c"),
                             Article = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            CategoryId = new Guid("df105327-3a71-431c-b8ca-b2a4a3065b45"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4695),
-                            Slug = "article-test-8DCB470BED092A2",
+                            CategoryId = new Guid("40210dde-c149-42fc-baf3-5477f9a1f9fb"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4769),
+                            Slug = "article-test-50e614a",
                             Status = "published",
                             Title = "Dummy Article",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(4695),
-                            UserId = new Guid("a25881b1-d522-4a71-b889-724da3084a81")
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(4769),
+                            UserId = new Guid("923e1e77-df01-44a6-a778-7843178c7138")
                         });
                 });
 
@@ -257,19 +260,19 @@ namespace nexus.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("774a46c6-ea74-48f8-8451-11dfddd405ce"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(2692),
+                            Id = new Guid("09c75270-321e-40d7-b7ad-1c5ebd1acd32"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(2328),
                             Name = "Admin",
                             Status = "active",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(2693)
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(2329)
                         },
                         new
                         {
-                            Id = new Guid("c0a3574d-b205-431c-a6fa-7bd8b138d610"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(2696),
+                            Id = new Guid("8dad5d93-472a-4736-96c5-14432316fb93"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(2332),
                             Name = "User",
                             Status = "active",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(2696)
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(2332)
                         });
                 });
 
@@ -344,15 +347,15 @@ namespace nexus.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a25881b1-d522-4a71-b889-724da3084a81"),
-                            CreatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(7191),
+                            Id = new Guid("923e1e77-df01-44a6-a778-7843178c7138"),
+                            CreatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(7451),
                             Email = "admin@gmail.com",
                             Fullname = "Administrator",
-                            Nik = 76247031L,
-                            Password = "$2a$11$wW2WZ8q5uGK4IHfLnO2TDuN4PPYmvW4JrPGkSiqMWtAPvNBbn8LJa",
-                            RoleId = new Guid("774a46c6-ea74-48f8-8451-11dfddd405ce"),
+                            Nik = 37042529L,
+                            Password = "$2a$11$rwqwi8ehg8.hgRcf111Jc.36ivkSHj3tk1R1FTHaEfP5YQXGH1XZS",
+                            RoleId = new Guid("09c75270-321e-40d7-b7ad-1c5ebd1acd32"),
                             Status = "active",
-                            UpdatedAt = new DateTime(2024, 8, 4, 10, 32, 31, 44, DateTimeKind.Utc).AddTicks(7191),
+                            UpdatedAt = new DateTime(2024, 8, 4, 15, 16, 20, 640, DateTimeKind.Utc).AddTicks(7451),
                             Username = "admin"
                         });
                 });
